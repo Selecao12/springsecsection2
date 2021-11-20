@@ -7,25 +7,33 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /**
-     * /myAccount - Secured
-     * /myBalance - Secured
-     * /myLoans - Secured
-     * /myCard - Secured
-     * /notices - Not Secured
-     * /contact - Not Secured
-     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests((requests) -> {
             requests
+                    /*
+                      /myAccount - Secured
+                      /myBalance - Secured
+                      /myLoans - Secured
+                      /myCard - Secured
+                      /notices - Not Secured
+                      /contact - Not Secured
+                     */
 //                    .antMatchers("/myAccount").authenticated()
 //                    .antMatchers("/myBalance").authenticated()
 //                    .antMatchers("/myLoans").authenticated()
 //                    .antMatchers("/myCard").authenticated()
 //                    .antMatchers("/notices").permitAll()
 //                    .antMatchers("/contact").permitAll();
-                    .anyRequest().denyAll();
+
+                    /*
+                     deny all requests
+                     */
+//                    .anyRequest().denyAll();
+                    /*
+                     permit all requests
+                     */
+                    .anyRequest().permitAll();
         });
         http.formLogin();
         http.httpBasic();
