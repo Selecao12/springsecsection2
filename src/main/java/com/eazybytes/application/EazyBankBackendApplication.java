@@ -6,7 +6,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 
 @SpringBootApplication
-@ComponentScans({@ComponentScan("com.eazybytes.controller"), @ComponentScan("com.eazybytes.config")})
+@ComponentScans({
+        @ComponentScan("com.eazybytes.controller"),
+        @ComponentScan("com.eazybytes.config")
+})
 public class EazyBankBackendApplication {
 
     public static void main(String[] args) {
