@@ -8,16 +8,13 @@ import org.springframework.context.annotation.ComponentScans;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScans({
-        @ComponentScan("com.eazybytes.controller"),
-        @ComponentScan("com.eazybytes.config")
-})
+@ComponentScans({ @ComponentScan("com.eazybytes.controller"), @ComponentScan("com.eazybytes.config")})
 @EnableJpaRepositories("com.eazybytes.repository")
 @EntityScan("com.eazybytes.model")
 public class EazyBankBackendApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(EazyBankBackendApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(EazyBankBackendApplication.class, args);
+	}
 
 }
