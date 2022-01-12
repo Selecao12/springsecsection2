@@ -37,9 +37,9 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
 			}
 		}).and().csrf().ignoringAntMatchers("/contact").csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and().
 		authorizeRequests()
-				.antMatchers("/myAccount").hasAuthority("UPDATE")
-				.antMatchers("/myBalance").hasAuthority("READ")
-				.antMatchers("/myLoans").hasAuthority("DELETE")
+				.antMatchers("/myAccount").hasRole("USER")
+				.antMatchers("/myBalance").hasAnyRole("USER", "ADMIN")
+				.antMatchers("/myLoans").hasRole("ROOT")
 				.antMatchers("/myCards").authenticated()
 				.antMatchers("/user").authenticated()
 				.antMatchers("/notices").permitAll()
