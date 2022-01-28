@@ -8,17 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import com.eazybytes.filter.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 @Configuration
+@EnableGlobalMethodSecurity(jsr250Enabled = true, prePostEnabled = true, securedEnabled = true)
 public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
@@ -53,8 +54,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/myAccount").hasRole("USER")
                 .antMatchers("/myBalance").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/myLoans").hasRole("ROOT")
-                .antMatchers("/myCards").authenticated()
+                .antMatchers("/myLoans").authenticated()
+                .antMatchers("/myCards").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/user").authenticated()
                 .antMatchers("/notices").permitAll()
                 .antMatchers("/contact").permitAll().and().httpBasic();
